@@ -26,5 +26,70 @@ public:
 
         return baptistPattern;
     }
+
+    static std::vector<offset> createVector() {
+        std::vector<offset> vectorPattern;
+
+        for (int i = 0; i < 45; i++) {
+            vectorPattern.push_back(offset(0, 60.f, 1.4f));
+        }
+        for (int i = 0; i < 25; i++) {
+            vectorPattern.push_back(offset(0, 0, 0.0f));
+        }
+
+        return vectorPattern;
+    }
+
+    static std::vector<offset> createAk308() {
+        std::vector<offset> vectorPattern;
+
+        for (int i = 0; i < 60; i++) {
+            vectorPattern.push_back(offset(0, 44.f, 1.3f));
+        }
+        for (int i = 0; i < 20; i++) {
+            vectorPattern.push_back(offset(0, 0, 0.0f));
+        }
+
+        return vectorPattern;
+    }
+
+    static std::vector<offset> createAk74m() {
+        std::vector<offset> vectorPattern;
+
+        for (int i = 0; i < 95; i++) {
+            vectorPattern.push_back(offset(0, 32.f, 2.04f));
+        }
+        for (int i = 0; i < 20; i++) {
+            vectorPattern.push_back(offset(0, 0, 0.0f));
+        }
+
+        return vectorPattern;
+    }
+
+    static std::vector<offset> createAk12() {
+        std::vector<offset> vectorPattern;
+
+        for (int i = 0; i < 95; i++) {
+            vectorPattern.push_back(offset(0, 30.f, 1.f));
+        }
+        for (int i = 0; i < 20; i++) {
+            vectorPattern.push_back(offset(0, 0, 0.0f));
+        }
+
+        return vectorPattern;
+    }
+
+    static std::vector<offset> createG36() {
+        std::vector<offset> vectorPattern;
+
+        for (int i = 0; i < 80; i++) {
+            vectorPattern.push_back(offset(0, 33.f, 0.85f));
+        }
+        for (int i = 0; i < 20; i++) {
+            vectorPattern.push_back(offset(0, 0, 0.0f));
+        }
+
+        return vectorPattern;
+    }
 };
 

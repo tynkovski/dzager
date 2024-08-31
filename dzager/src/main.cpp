@@ -6,7 +6,7 @@
 #include "recoil-compensator.h"
 #include "movement-randomizer.h"
 
-float parseOfDefault(std::string str, float dflt) {
+float parseOrDefault(std::string str, float dflt) {
 	if (str.empty()) return dflt;
 	float out;
 	try {
@@ -22,9 +22,10 @@ int main() {
 	mINI::INIStructure ini;
 	file.read(ini);
 
-	float screenHeight = parseOfDefault(ini["settings"]["screenHeight"], 1080.f);
-	float dpi          = parseOfDefault(ini["settings"]["dpi"]         , 400.f);
-	float sens         = parseOfDefault(ini["settings"]["sens"]        , 9.f);
+	float screenHeight = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
+	float dpi          = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
+	float sens         = parseOrDefault(ini["settings"]["sens"]        , 9.f);
+
 	float recoilFactor = screenHeight / (dpi * sens * 2.f);
 	
 	std::cout << "screenHeight: " << screenHeight << "\n";
@@ -32,13 +33,19 @@ int main() {
 	std::cout << "dpi:          " << dpi << "\n";
 	std::cout << "recoilFactor: " << recoilFactor << "\n";
 
-	RecoilCompensator compensator = RecoilCompensator(recoilFactor, OffsetFactory::createSoldier());
-	// MovementRandomizer randomizer = MovementRandomizer();
-
+	// auto pattern = OffsetFactory::createSoldier();
+	// auto pattern = OffsetFactory::createVector();
+	// auto pattern = OffsetFactory::createG36();
+	// auto pattern = OffsetFactory::createAk308();
+	// auto pattern = OffsetFactory::createAk74m();
+	// auto pattern = OffsetFactory::createVector();
+	auto pattern = OffsetFactory::createAk12();
+	RecoilCompensator compensator = RecoilCompensator(recoilFactor, pattern);
 	std::thread compensatorThread = std::thread(&RecoilCompensator::compensateRecoil, &compensator);
-	// std::thread randomizerThread  = std::thread(&MovementRandomizer::doMovement, &randomizer);
-
 	compensatorThread.join();
+
+	// MovementRandomizer randomizer = MovementRandomizer();
+	// std::thread randomizerThread  = std::thread(&MovementRandomizer::doMovement, &randomizer);
 	// randomizerThread.join();
 
 	return 0;

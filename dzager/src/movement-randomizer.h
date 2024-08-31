@@ -1,7 +1,5 @@
 #pragma once
 #include <iostream>
-#include <vector>
-#include <thread>
 #include <Windows.h>
 
 enum class MovementDirection { Left, Right };
@@ -11,7 +9,7 @@ public:
     MovementRandomizer();
     void doMovement();
 private:
-    void simulateKeyPress( const WORD& key, const int& delay) const;
+    void simulateKeyPress(const WORD& key, const int& delay) const;
     void releaseInput(const WORD& key) const;
     void changeMovement();
     int getMovementCode() const;
@@ -20,6 +18,6 @@ private:
     void deactivate();
     
     MovementDirection m_movementDirection;
-    bool m_activated;
+    bool m_active;
 };
 

@@ -1,95 +1,29 @@
 #pragma once
+#include <string>
 #include <vector>
+#include <unordered_map>
+
+#include "observer.h"
 #include "offset.h"
+
+#define DEFAULT_PATTERN "ak12"
 
 class OffsetFactory {
 public:
-    static std::vector<offset> createSoldier() {
-        std::vector<offset> soldierPattern;
+    OffsetFactory();
 
-        for (int i = 0; i < 110; i++) {
-            soldierPattern.push_back(offset(0, std::min<int>(i, 20), 1.f));
-        }
+    std::vector<offset> getDefault();
+    std::vector<offset> getPattern(const std::string &str) const;
 
-        return soldierPattern;
-    }
+    std::vector<offset> createSoldier();
+    std::vector<offset> createBaptist();
 
-    static std::vector<offset> createBaptist() {
-        std::vector<offset> baptistPattern;
+    std::vector<offset> createAk12();
+    std::vector<offset> createVector();
+    std::vector<offset> createAk308();
+    std::vector<offset> createAk74m();
+    std::vector<offset> createG36();
 
-        for (int i = 0; i < 10; i++) {
-            baptistPattern.push_back(offset(0, 24.5f, 0.f));
-        }
-        for (int i = 0; i < 9; i++) {
-            baptistPattern.push_back(offset(0, -6.7f, 0.f));
-        }
-
-        return baptistPattern;
-    }
-
-    static std::vector<offset> createVector() {
-        std::vector<offset> vectorPattern;
-
-        for (int i = 0; i < 45; i++) {
-            vectorPattern.push_back(offset(0, 60.f, 1.4f));
-        }
-        for (int i = 0; i < 25; i++) {
-            vectorPattern.push_back(offset(0, 0, 0.0f));
-        }
-
-        return vectorPattern;
-    }
-
-    static std::vector<offset> createAk308() {
-        std::vector<offset> vectorPattern;
-
-        for (int i = 0; i < 60; i++) {
-            vectorPattern.push_back(offset(0, 44.f, 1.3f));
-        }
-        for (int i = 0; i < 20; i++) {
-            vectorPattern.push_back(offset(0, 0, 0.0f));
-        }
-
-        return vectorPattern;
-    }
-
-    static std::vector<offset> createAk74m() {
-        std::vector<offset> vectorPattern;
-
-        for (int i = 0; i < 95; i++) {
-            vectorPattern.push_back(offset(0, 32.f, 2.04f));
-        }
-        for (int i = 0; i < 20; i++) {
-            vectorPattern.push_back(offset(0, 0, 0.0f));
-        }
-
-        return vectorPattern;
-    }
-
-    static std::vector<offset> createAk12() {
-        std::vector<offset> vectorPattern;
-
-        for (int i = 0; i < 95; i++) {
-            vectorPattern.push_back(offset(0, 30.f, 1.f));
-        }
-        for (int i = 0; i < 20; i++) {
-            vectorPattern.push_back(offset(0, 0, 0.0f));
-        }
-
-        return vectorPattern;
-    }
-
-    static std::vector<offset> createG36() {
-        std::vector<offset> vectorPattern;
-
-        for (int i = 0; i < 80; i++) {
-            vectorPattern.push_back(offset(0, 33.f, 0.85f));
-        }
-        for (int i = 0; i < 20; i++) {
-            vectorPattern.push_back(offset(0, 0, 0.0f));
-        }
-
-        return vectorPattern;
-    }
+private:
+    std::unordered_map<std::string, std::vector<offset>> m_offsetTable;
 };
-

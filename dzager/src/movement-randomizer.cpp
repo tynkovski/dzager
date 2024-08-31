@@ -1,8 +1,11 @@
 #include "movement-randomizer.h"
 
+#include <vector>
+#include <thread>
+
 MovementRandomizer::MovementRandomizer() {
     m_movementDirection = MovementDirection::Left;
-    m_activated = false;
+    m_active = false;
 }
 
 inline void keyDown(INPUT& input, const WORD& key) {
@@ -53,9 +56,9 @@ int MovementRandomizer::getMovementCode() const {
 }
 
 void MovementRandomizer::activate() {
-    m_activated = true;
+    m_active = true;
 }
 
 void MovementRandomizer::deactivate() {
-    m_activated = false;
+    m_active = false;
 }

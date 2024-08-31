@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
-#include <string>
 #include <vector>
+
 #include "offset-factory.h"
 #include "observer.h"
 #include "offset.h"

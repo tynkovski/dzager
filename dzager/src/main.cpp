@@ -14,13 +14,16 @@
 
 float parseOrDefault(std::string str, float dflt) {
 	if (str.empty()) return dflt;
-	float out;
 	try {
-		out = std::stof(str);
+		return std::stof(str);
 	} catch (const std::invalid_argument& e) {
-		out = dflt;
+		return dflt;
 	}
-	return out;
+}
+
+std::string parseOrDefault(std::string str, std::string dflt) {
+	if (str.empty()) return dflt;
+	return str;
 }
 
 int main() {
@@ -28,25 +31,27 @@ int main() {
 	mINI::INIStructure ini;
 	file.read(ini);
 
-	float screenHeight = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
-	float dpi          = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
-	float sens         = parseOrDefault(ini["settings"]["sens"]        , 9.f);
+	float screenHeight         = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
+	float dpi                  = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
+	float sens                 = parseOrDefault(ini["settings"]["sens"]        , 9.f);
+	std::string defaultPattern = parseOrDefault(ini["settings"]["default"]     , "ak12");
 
 	float recoilFactor = screenHeight / (dpi * sens * 2.f);
 	
-	std::cout << "screenHeight: " << screenHeight << "\n";
-	std::cout << "sens:         " << sens << "\n";
-	std::cout << "dpi:          " << dpi << "\n";
-	std::cout << "recoilFactor: " << recoilFactor << "\n";
+	std::cout << "screenHeight  : " << screenHeight << "\n";
+	std::cout << "sens          : " << sens << "\n";
+	std::cout << "dpi           : " << dpi << "\n";
+	std::cout << "recoilFactor  : " << recoilFactor << "\n";
+	std::cout << "defaultPattern: " << defaultPattern << "\n";
 
 	// MovementRandomizer randomizer = MovementRandomizer();
 	// std::thread randomizerThread  = std::thread(&MovementRandomizer::doMovement, &randomizer);
 
-	InputController controller = InputController();
-	std::vector<offset> pattern = controller.getOffsetFactory().getDefault();
-
+	OffsetFactory factory = OffsetFactory();
+	std::vector<offset> pattern = factory.getPattern(defaultPattern);
 	RecoilCompensator compensator = RecoilCompensator(recoilFactor, pattern);
-
+	
+	InputController controller = InputController(&factory);
 	controller.registerObserver(&compensator);
 
 	std::thread compensatorThread = std::thread(&RecoilCompensator::compensateRecoil, &compensator);

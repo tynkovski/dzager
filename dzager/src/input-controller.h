@@ -8,17 +8,14 @@
 
 class InputController {
 public:
-	InputController();
+	InputController(OffsetFactory* factory);
 
 	void getInput();
 	void registerObserver(observer<std::vector<offset>>* _observer);
-
-	OffsetFactory getOffsetFactory() const;
-
 private:
 	std::vector<observer<std::vector<offset>>*> m_observers;
-	OffsetFactory m_offsetFactory;
 	std::string m_str;
+	OffsetFactory* m_offsetFactory;
 
 	void notifyObservers() const;
 	void getConsoleInput();

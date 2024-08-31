@@ -3,8 +3,8 @@
 
 #include "input-controller.h"
 
-InputController::InputController() {
-    m_offsetFactory = OffsetFactory();
+InputController::InputController(OffsetFactory *factory) {
+    m_offsetFactory = factory;
 }
 
 void InputController::getInput() {
@@ -32,14 +32,10 @@ void InputController::registerObserver(observer<std::vector<offset>>* _observer)
 void InputController::notifyObservers() const {
     for (auto &o : m_observers) {
         try {
-            o->update(m_offsetFactory.getPattern(m_str));
+            o->update(m_offsetFactory->getPattern(m_str));
             std::cout << "setting up " << m_str << "\n";
         } catch (const std::invalid_argument& e) {
             std::cout << "not found pattern " << e.what() << "\n";
         }
     }
-}
-
-OffsetFactory InputController::getOffsetFactory() const {
-    return m_offsetFactory;
 }

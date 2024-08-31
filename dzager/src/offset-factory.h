@@ -6,13 +6,10 @@
 #include "observer.h"
 #include "offset.h"
 
-#define DEFAULT_PATTERN "ak12"
-
 class OffsetFactory {
 public:
     OffsetFactory();
 
-    std::vector<offset> getDefault();
     std::vector<offset> getPattern(const std::string &str) const;
 
     std::vector<offset> createSoldier();

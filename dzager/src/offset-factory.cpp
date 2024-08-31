@@ -9,10 +9,6 @@ OffsetFactory::OffsetFactory() {
     m_offsetTable["g36"]    = createG36();
 }
 
-std::vector<offset> OffsetFactory::getDefault() {
-    return m_offsetTable[DEFAULT_PATTERN];
-}
-
 std::vector<offset> OffsetFactory::getPattern(const std::string& str) const {
     if (m_offsetTable.contains(str)) {
         return m_offsetTable.at(str);

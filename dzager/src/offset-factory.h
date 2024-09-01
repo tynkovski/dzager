@@ -19,6 +19,7 @@ public:
     std::vector<offset> createVector();
     std::vector<offset> createAk308();
     std::vector<offset> createAk74m();
+    std::vector<offset> createVal();
     std::vector<offset> createG36();
 
 private:

@@ -7,6 +7,7 @@ OffsetFactory::OffsetFactory() {
     m_offsetTable["ak308"]  = createAk308();
     m_offsetTable["ak74m"]  = createAk74m();
     m_offsetTable["g36"]    = createG36();
+    m_offsetTable["val"]    = createVal();
 }
 
 std::vector<offset> OffsetFactory::getPattern(const std::string& str) const {
@@ -71,6 +72,19 @@ std::vector<offset> OffsetFactory::createAk74m() {
 
     for (int i = 0; i < 95; i++) {
         vectorPattern.push_back(offset(0, 32.f, 2.04f));
+    }
+    for (int i = 0; i < 20; i++) {
+        vectorPattern.push_back(offset(0, 0, 0.0f));
+    }
+
+    return vectorPattern;
+}
+
+std::vector<offset> OffsetFactory::createVal() {
+    std::vector<offset> vectorPattern;
+
+    for (int i = 0; i < 60; i++) {
+        vectorPattern.push_back(offset(0, 30.f, 1.5f));
     }
     for (int i = 0; i < 20; i++) {
         vectorPattern.push_back(offset(0, 0, 0.0f));

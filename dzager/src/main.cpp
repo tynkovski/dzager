@@ -34,7 +34,7 @@ int main() {
 	float screenHeight         = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
 	float dpi                  = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
 	float sens                 = parseOrDefault(ini["settings"]["sens"]        , 9.f);
-	std::string defaultPattern = parseOrDefault(ini["settings"]["default"]     , "ak12");
+	std::string defaultPattern = parseOrDefault(ini["settings"]["default"]     , "val");
 
 	float recoilFactor = screenHeight / (dpi * sens * 2.f);
 	

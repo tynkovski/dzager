@@ -4,13 +4,12 @@
 #include <string>
 #include <Windows.h>
 
-#include "mini/ini.h"
-#include "json/json.h"
+#include "include/mini/ini.h"
+#include "include/json/json.h"
 
-#include "offset-factory.h"
-#include "recoil-compensator.h"
-#include "movement-randomizer.h"
-#include "input-controller.h"
+#include "include/offset-factory.h"
+#include "include/recoil-compensator.h"
+#include "include/input-controller.h"
 
 float parseOrDefault(std::string str, float dflt) {
 	if (str.empty()) return dflt;
@@ -31,24 +30,23 @@ int main() {
 	mINI::INIStructure ini;
 	file.read(ini);
 
-	float screenHeight         = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
-	float dpi                  = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
-	float sens                 = parseOrDefault(ini["settings"]["sens"]        , 9.f);
-	std::string defaultPattern = parseOrDefault(ini["settings"]["default"]     , "val");
+	float screenHeight   = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
+	float dpi            = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
+	float sens           = parseOrDefault(ini["settings"]["sens"]        , 9.f);
+	std::string startWpn = parseOrDefault(ini["settings"]["startWpn"]    , "ak47");
 
-	float recoilFactor = screenHeight / (dpi * sens * 2.f);
+	float recoilFactor = screenHeight / (dpi * sens);
 	
 	std::cout << "screenHeight  : " << screenHeight << "\n";
 	std::cout << "sens          : " << sens << "\n";
 	std::cout << "dpi           : " << dpi << "\n";
 	std::cout << "recoilFactor  : " << recoilFactor << "\n";
-	std::cout << "defaultPattern: " << defaultPattern << "\n";
-
-	// MovementRandomizer randomizer = MovementRandomizer();
-	// std::thread randomizerThread  = std::thread(&MovementRandomizer::doMovement, &randomizer);
+	std::cout << "startWpn      : " << startWpn << "\n";
 
 	OffsetFactory factory = OffsetFactory();
-	std::vector<offset> pattern = factory.getPattern(defaultPattern);
+
+	std::vector<offset> pattern = factory.getWeaponPattern(startWpn);
+
 	RecoilCompensator compensator = RecoilCompensator(recoilFactor, pattern);
 	
 	InputController controller = InputController(&factory);
@@ -59,8 +57,6 @@ int main() {
 
 	compensatorThread.join();
 	consoleReaderThread.join();
-
-	// randomizerThread.join();
 
 	return 0;
 }

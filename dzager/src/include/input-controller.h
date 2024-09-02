@@ -12,6 +12,7 @@ public:
 
 	void getInput();
 	void registerObserver(observer<std::vector<offset>>* _observer);
+
 private:
 	std::vector<observer<std::vector<offset>>*> m_observers;
 	std::string m_str;

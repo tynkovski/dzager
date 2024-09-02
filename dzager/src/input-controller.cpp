@@ -1,7 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 
-#include "input-controller.h"
+#include "include/input-controller.h"
 
 InputController::InputController(OffsetFactory *factory) {
     m_offsetFactory = factory;
@@ -32,7 +32,7 @@ void InputController::registerObserver(observer<std::vector<offset>>* _observer)
 void InputController::notifyObservers() const {
     for (auto &o : m_observers) {
         try {
-            o->update(m_offsetFactory->getPattern(m_str));
+            o->update(m_offsetFactory->getWeaponPattern(m_str));
             std::cout << "setting up " << m_str << "\n";
         } catch (const std::invalid_argument& e) {
             std::cout << "not found pattern " << e.what() << "\n";

@@ -5,11 +5,9 @@
 #include <vector>
 #include <Windows.h>
 
-static const int DELAY = 16;
-
 class RecoilCompensator : public observer<std::vector<offset>> {
 public:
-    RecoilCompensator(const float& recoilFactor, const std::vector<offset>& pattern);
+    RecoilCompensator(float recoilFactor, const std::vector<offset>& pattern);
 
     void update(const std::vector<offset> &pattern);
     void compensateRecoil();

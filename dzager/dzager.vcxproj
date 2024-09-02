@@ -132,20 +132,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\input-controller.cpp" />
-    <ClCompile Include="src\movement-randomizer.cpp" />
-    <ClCompile Include="src\observer.h" />
+    <ClCompile Include="src\include\observer.h" />
     <ClCompile Include="src\offset-factory.cpp" />
     <ClCompile Include="src\recoil-compensator.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\input-controller.h" />
-    <ClInclude Include="src\json\json.h" />
-    <ClInclude Include="src\movement-randomizer.h" />
-    <ClInclude Include="src\offset-factory.h" />
-    <ClInclude Include="src\recoil-compensator.h" />
-    <ClInclude Include="src\mini\ini.h" />
-    <ClInclude Include="src\offset.h" />
+    <ClInclude Include="src\include\input-controller.h" />
+    <ClInclude Include="src\include\json\json.h" />
+    <ClInclude Include="src\include\offset-factory.h" />
+    <ClInclude Include="src\include\recoil-compensator.h" />
+    <ClInclude Include="src\include\mini\ini.h" />
+    <ClInclude Include="src\include\offset.h" />
+    <ClInclude Include="src\include\scope.h" />
+    <ClInclude Include="src\include\weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,39 +21,39 @@
     <ClCompile Include="src\recoil-compensator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\movement-randomizer.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="src\input-controller.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\offset-factory.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\observer.h">
+    <ClCompile Include="src\include\observer.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\offset.h">
+    <ClInclude Include="src\include\offset.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\mini\ini.h">
+    <ClInclude Include="src\include\mini\ini.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\recoil-compensator.h">
+    <ClInclude Include="src\include\recoil-compensator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\movement-randomizer.h">
+    <ClInclude Include="src\include\input-controller.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\input-controller.h">
+    <ClInclude Include="src\include\offset-factory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\offset-factory.h">
+    <ClInclude Include="src\include\json\json.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="src\json\json.h">
+    <ClInclude Include="src\include\weapon.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="src\include\scope.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

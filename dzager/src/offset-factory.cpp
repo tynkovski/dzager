@@ -5,35 +5,24 @@
 
 const float cst = 1000.f / 30.f;
 
-OffsetFactory::OffsetFactory() {
+OffsetFactory::OffsetFactory(const std::vector<weapon>& weaponsv) {
+    for (auto& wpn : weaponsv) {
+        m_weaponTable[wpn.m_name] = wpn;
+    } 
 
-    m_weaponTable["m16"]    = new weapon("m16",    700,  30, 15.f, nullptr);
-    m_weaponTable["ak47"]   = new weapon("ak47",   600,  30, 19.f, nullptr);
-    m_weaponTable["ak12"]   = new weapon("ak12",   650,  30, 15.f, nullptr);
-    m_weaponTable["vector"] = new weapon("vector", 1100, 25, 30.f, nullptr);
-    m_weaponTable["ak308"]  = new weapon("ak308",  650,  20, 22.f, nullptr);
-    m_weaponTable["ak74m"]  = new weapon("ak74m",  630,  30, 16.f, nullptr);
-    m_weaponTable["g36"]    = new weapon("g36",    750,  30, 16.f, nullptr);
-    m_weaponTable["val"]    = new weapon("val",    850,  20, 15.f, nullptr);
-    
     m_offsetTable["ow.soldier"] = createSoldier();
     m_offsetTable["ow.baptist"] = createBaptist();
 }
 
-std::vector<offset> OffsetFactory::createPattern(weapon *wpn) const {
+std::vector<offset> OffsetFactory::createPattern(const weapon &wpn) const {
     std::vector<offset> pattern;
 
-    if (wpn == nullptr) return pattern;
+    float rps = wpn.m_rpm / 60.f;
 
-    float rps = wpn->rpm / 60.f;
-
-    int burstTicks = (int) ((float)wpn->magSize / rps * cst);
-    float aimMultiplier = wpn->scope == nullptr
-        ? 1.f
-        : wpn->scope->aimMultiplier;
+    int burstTicks = (int) ((float)wpn.m_magSize / rps * cst);
 
     for (int i = 0; i < burstTicks; i++) {
-        pattern.push_back(offset(0, wpn->recoil, aimMultiplier));
+        pattern.push_back(offset(0, wpn.m_recoil, wpn.m_scope.aimMultiplier));
     }
 
     float releaseTicks = 20;
@@ -46,7 +35,7 @@ std::vector<offset> OffsetFactory::createPattern(weapon *wpn) const {
  
 std::vector<offset> OffsetFactory::getWeaponPattern(const std::string& str) const {
     if (m_weaponTable.contains(str)) {
-        weapon* wpn = m_weaponTable.at(str);
+        weapon wpn = m_weaponTable.at(str);
         std::vector<offset> pattern = createPattern(wpn);
         return pattern;
     }
@@ -56,8 +45,7 @@ std::vector<offset> OffsetFactory::getWeaponPattern(const std::string& str) cons
 std::vector<offset> OffsetFactory::getOverwatchPattern(const std::string& str) const {
     if (m_offsetTable.contains(str)) {
         return m_offsetTable.at(str);
-    } 
-
+    }
     throw std::invalid_argument(str);
 }
 

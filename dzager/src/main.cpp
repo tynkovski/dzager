@@ -33,7 +33,7 @@ int main() {
 	float screenHeight   = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
 	float dpi            = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
 	float sens           = parseOrDefault(ini["settings"]["sens"]        , 9.f);
-	std::string startWpn = parseOrDefault(ini["settings"]["startWpn"]    , "ak47");
+	std::string startWpn = parseOrDefault(ini["settings"]["startWpn"]    , "m16");
 
 	float recoilFactor = screenHeight / (dpi * sens);
 	
@@ -43,7 +43,60 @@ int main() {
 	std::cout << "recoilFactor  : " << recoilFactor << "\n";
 	std::cout << "startWpn      : " << startWpn << "\n";
 
-	OffsetFactory factory = OffsetFactory();
+	auto weapons = read_weapons_json(R"({
+	"weapons":[
+		{
+			"name":"m16",
+			"rpm":700,
+			"magSize":30,
+			"recoil":15.0
+		},
+		{
+			"name":"ak47",
+			"rpm":600,
+			"magSize":30,
+			"recoil":19.0
+		},
+		{
+			"name":"ak12",
+			"rpm":650,
+			"magSize":30,
+			"recoil":15.0
+		},
+		{
+			"name":"vector",
+			"rpm":1100,
+			"magSize":25,
+			"recoil":30.0
+		},
+		{
+			"name":"ak308",
+			"rpm":650,
+			"magSize":20,
+			"recoil":22.0
+		},
+		{
+			"name":"ak74m",
+			"rpm":630,
+			"magSize":30,
+			"recoil":16.0
+		},
+		{
+			"name":"g36",
+			"rpm":750,
+			"magSize":30,
+			"recoil":16.0
+		},
+		{
+			"name":"val",
+			"rpm":850,
+			"magSize":20,
+			"recoil":15.0
+		}
+	]
+})");
+
+	OffsetFactory factory = OffsetFactory(weapons);
 
 	std::vector<offset> pattern = factory.getWeaponPattern(startWpn);
 
@@ -53,10 +106,10 @@ int main() {
 	controller.registerObserver(&compensator);
 
 	std::thread compensatorThread = std::thread(&RecoilCompensator::compensateRecoil, &compensator);
-	std::thread consoleReaderThread = std::thread(&InputController::getInput, &controller);
+	std::thread controllerThread = std::thread(&InputController::getInput, &controller);
 
 	compensatorThread.join();
-	consoleReaderThread.join();
+	controllerThread.join();
 
 	return 0;
 }

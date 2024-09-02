@@ -7,7 +7,7 @@ const float cst = 1000.f / 30.f;
 
 OffsetFactory::OffsetFactory() {
 
-    m_weaponTable["m16"]   = new weapon("m16",     700,  30, 15.f, nullptr);
+    m_weaponTable["m16"]    = new weapon("m16",    700,  30, 15.f, nullptr);
     m_weaponTable["ak47"]   = new weapon("ak47",   600,  30, 19.f, nullptr);
     m_weaponTable["ak12"]   = new weapon("ak12",   650,  30, 15.f, nullptr);
     m_weaponTable["vector"] = new weapon("vector", 1100, 25, 30.f, nullptr);

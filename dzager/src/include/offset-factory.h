@@ -14,18 +14,10 @@ public:
     std::vector<offset> createPattern(weapon* wpn) const;
 
     std::vector<offset> getWeaponPattern(const std::string &str) const;
-    std::vector<offset> getPattern(const std::string &str) const;
 
+    std::vector<offset> getOverwatchPattern(const std::string &str) const;
     std::vector<offset> createSoldier();
     std::vector<offset> createBaptist();
-
-    // deprecated
-    std::vector<offset> createAk12();
-    std::vector<offset> createVector();
-    std::vector<offset> createAk308();
-    std::vector<offset> createAk74m();
-    std::vector<offset> createVal();
-    std::vector<offset> createG36();
 
 private:
     std::unordered_map<std::string, std::vector<offset>> m_offsetTable;

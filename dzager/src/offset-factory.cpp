@@ -53,7 +53,7 @@ std::vector<offset> OffsetFactory::getWeaponPattern(const std::string& str) cons
     throw std::invalid_argument(str);
 }
 
-std::vector<offset> OffsetFactory::getPattern(const std::string& str) const {
+std::vector<offset> OffsetFactory::getOverwatchPattern(const std::string& str) const {
     if (m_offsetTable.contains(str)) {
         return m_offsetTable.at(str);
     } 
@@ -84,82 +84,3 @@ std::vector<offset> OffsetFactory::createBaptist() {
     return baptistPattern;
 }
 
-// deprecated
-std::vector<offset> OffsetFactory::createVector() {
-    std::vector<offset> vectorPattern;
-
-    for (int i = 0; i < 45; i++) {
-        vectorPattern.push_back(offset(0, 30.f, 1.4f));
-    }
-    for (int i = 0; i < 25; i++) {
-        vectorPattern.push_back(offset(0, 0, 0.0f));
-    }
-
-    return vectorPattern;
-}
-
-std::vector<offset> OffsetFactory::createAk308() {
-    std::vector<offset> vectorPattern;
-
-    for (int i = 0; i < 60; i++) {
-        vectorPattern.push_back(offset(0, 22.f, 0.8f));
-    }
-    for (int i = 0; i < 20; i++) {
-        vectorPattern.push_back(offset(0, 0, 0.0f));
-    }
-
-    return vectorPattern;
-}
-
-std::vector<offset> OffsetFactory::createAk74m() {
-    std::vector<offset> vectorPattern;
-
-    for (int i = 0; i < 95; i++) {
-        vectorPattern.push_back(offset(0, 16.f, 2.04f));
-    }
-    for (int i = 0; i < 20; i++) {
-        vectorPattern.push_back(offset(0, 0, 0.0f));
-    }
-
-    return vectorPattern;
-}
-
-std::vector<offset> OffsetFactory::createVal() {
-    std::vector<offset> vectorPattern;
-
-    for (int i = 0; i < 60; i++) {
-        vectorPattern.push_back(offset(0, 15.f, 1.0f));
-    }
-    for (int i = 0; i < 20; i++) {
-        vectorPattern.push_back(offset(0, 0, 0.0f));
-    }
-
-    return vectorPattern;
-}
-
-std::vector<offset> OffsetFactory::createAk12() {
-    std::vector<offset> vectorPattern;
-
-    for (int i = 0; i < 95; i++) {
-        vectorPattern.push_back(offset(0, 15.f, 1.f));
-    }
-    for (int i = 0; i < 20; i++) {
-        vectorPattern.push_back(offset(0, 0, 0.0f));
-    }
-
-    return vectorPattern;
-}
-
-
-std::vector<offset> OffsetFactory::createG36() {
-    std::vector<offset> vectorPattern;
-
-    for (int i = 0; i < 80; i++) {
-        vectorPattern.push_back(offset(0, 16.f, 0.85f));
-    }
-    for (int i = 0; i < 20; i++) {
-        vectorPattern.push_back(offset(0, 0, 0.0f));
-    }
-
-    return vectorPattern;
-}

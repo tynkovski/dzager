@@ -1,0 +1,94 @@
+{
+  "scopes": [
+    {
+      "name": "red-dot",
+      "aimMultiplier": 1.0
+    },
+    {
+      "name": "cobra",
+      "aimMultiplier": 1.0
+    },
+    {
+      "name": "reflex",
+      "aimMultiplier": 1.0
+    },
+    {
+      "name": "holo-mini",
+      "aimMultiplier": 1.0
+    },
+    {
+      "name": "holo",
+      "aimMultiplier": 1.0
+    },
+    {
+      "name": "acog",
+      "aimMultiplier": 1.0
+    },
+    {
+      "name": "pso-1",
+      "aimMultiplier": 1.0
+    },
+    {
+      "name": "specter",
+      "aimMultiplier": 1.0
+    }
+  ],
+  "weapons": [
+    {
+      "name": "m16",
+      "rpm": 700,
+      "magSize": 30,
+      "recoil": 15.0,
+      "scope": "holo-mini"
+    },
+    {
+      "name": "ak47",
+      "rpm": 600,
+      "magSize": 30,
+      "recoil": 19.0,
+      "scope": "none"
+    },
+    {
+      "name": "ak12",
+      "rpm": 650,
+      "magSize": 30,
+      "recoil": 15.0,
+      "scope": "holo-mini"
+    },
+    {
+      "name": "vector",
+      "rpm": 1100,
+      "magSize": 25,
+      "recoil": 30.0,
+      "scope": "holo-mini"
+    },
+    {
+      "name": "ak308",
+      "rpm": 650,
+      "magSize": 20,
+      "recoil": 22.0,
+      "scope": "reflex"
+    },
+    {
+      "name": "ak74m",
+      "rpm": 630,
+      "magSize": 30,
+      "recoil": 16.0,
+      "scope": "pso-1"
+    },
+    {
+      "name": "g36",
+      "rpm": 750,
+      "magSize": 30,
+      "recoil": 16.0,
+      "scope": "holo"
+    },
+    {
+      "name": "val",
+      "rpm": 850,
+      "magSize": 20,
+      "recoil": 15.0,
+      "scope": "holo-mini"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <thread>
 #include <vector>
 #include <string>
@@ -26,9 +27,9 @@ std::string parseOrDefault(std::string str, std::string dflt) {
 }
 
 int main() {
-	mINI::INIFile file("settings.ini");
+	mINI::INIFile iniFile("settings.ini");
 	mINI::INIStructure ini;
-	file.read(ini);
+	iniFile.read(ini);
 
 	float screenHeight   = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
 	float dpi            = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
@@ -38,63 +39,16 @@ int main() {
 	float recoilFactor = screenHeight / (dpi * sens);
 	
 	std::cout << "screenHeight  : " << screenHeight << "\n";
-	std::cout << "sens          : " << sens << "\n";
-	std::cout << "dpi           : " << dpi << "\n";
+	std::cout << "sens          : " << sens         << "\n";
+	std::cout << "dpi           : " << dpi          << "\n";
 	std::cout << "recoilFactor  : " << recoilFactor << "\n";
-	std::cout << "startWpn      : " << startWpn << "\n";
+	std::cout << "startWpn      : " << startWpn     << "\n";
 
-	auto weapons = read_weapons_json(R"({
-	"weapons":[
-		{
-			"name":"m16",
-			"rpm":700,
-			"magSize":30,
-			"recoil":15.0
-		},
-		{
-			"name":"ak47",
-			"rpm":600,
-			"magSize":30,
-			"recoil":19.0
-		},
-		{
-			"name":"ak12",
-			"rpm":650,
-			"magSize":30,
-			"recoil":15.0
-		},
-		{
-			"name":"vector",
-			"rpm":1100,
-			"magSize":25,
-			"recoil":30.0
-		},
-		{
-			"name":"ak308",
-			"rpm":650,
-			"magSize":20,
-			"recoil":22.0
-		},
-		{
-			"name":"ak74m",
-			"rpm":630,
-			"magSize":30,
-			"recoil":16.0
-		},
-		{
-			"name":"g36",
-			"rpm":750,
-			"magSize":30,
-			"recoil":16.0
-		},
-		{
-			"name":"val",
-			"rpm":850,
-			"magSize":20,
-			"recoil":15.0
-		}
-	]
-})");
+	std::ifstream jsonFile("weapons.json");
+	std::stringstream jsonBuffer;
+	jsonBuffer << jsonFile.rdbuf();
+
+	std::vector<weapon> weapons = read_weapons_json(jsonBuffer.str());
 
 	OffsetFactory factory = OffsetFactory(weapons);
 
@@ -106,7 +60,7 @@ int main() {
 	controller.registerObserver(&compensator);
 
 	std::thread compensatorThread = std::thread(&RecoilCompensator::compensateRecoil, &compensator);
-	std::thread controllerThread = std::thread(&InputController::getInput, &controller);
+	std::thread controllerThread  = std::thread(&InputController::getInput,           &controller);
 
 	compensatorThread.join();
 	controllerThread.join();

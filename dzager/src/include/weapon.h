@@ -6,12 +6,12 @@
 #include "json/json.h"  
 
 struct weapon {
-    weapon(std::string name, int rpm, int magSize, float recoil) {
+    weapon(std::string name, int rpm, int magSize, float recoil, scope _scope) {
         this->m_name    = name;
         this->m_rpm     = rpm;
         this->m_magSize = magSize;
         this->m_recoil  = recoil;
-        this->m_scope   = scope();
+        this->m_scope   = _scope;
     }
 
     weapon() {
@@ -30,17 +30,32 @@ struct weapon {
 };
 
 static inline std::vector<weapon> read_weapons_json(std::string json) {
-    std::vector<weapon> weaponsv;
+    std::vector<weapon> weapons;
+    std::unordered_map<std::string, scope> scopes;
 
-    auto j = nlohmann::json::parse(json);
-    auto weapons = j["weapons"];
+    auto jRoot = nlohmann::json::parse(json);
+    auto jWeapons = jRoot["weapons"];
+    auto jScopes = jRoot["scopes"];
 
-    for (auto& w : weapons) {
+    for (auto& s : jScopes) {
+        std::string name    = s["name"];
+        float aimMultiplier = s["aimMultiplier"];
+
+        scopes[name] = scope(name, aimMultiplier);
+    }
+
+    for (auto& w : jWeapons) {
         std::string name = w["name"];
         int rpm          = w["rpm"];
         int magSize      = w["magSize"];
         float recoil     = w["recoil"];
-        weaponsv.push_back(weapon(name, rpm, magSize, recoil));
+
+        std::string scopeName = w["scope"];
+
+        scope _scope = scopes.contains(scopeName) ? scopes[scopeName] : scope();
+
+        weapons.push_back(weapon(name, rpm, magSize, recoil, _scope));
     }
-    return weaponsv;
+
+    return weapons;
 }

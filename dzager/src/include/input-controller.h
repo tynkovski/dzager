@@ -15,7 +15,6 @@ public:
 
 private:
 	std::vector<observer<std::vector<offset>>*> m_observers;
-	std::string m_str;
 	OffsetFactory* m_offsetFactory;
 
 	void notifyObservers() const;

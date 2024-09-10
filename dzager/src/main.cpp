@@ -44,19 +44,9 @@ int main() {
 	std::cout << "recoilFactor  : " << recoilFactor << "\n";
 	std::cout << "startWpn      : " << startWpn     << "\n";
 
-	std::ifstream jsonFile("weapons.json");
-	std::stringstream jsonBuffer;
-	jsonBuffer << jsonFile.rdbuf();
-
-	std::vector<weapon> weapons = read_weapons_json(jsonBuffer.str());
-
-	OffsetFactory factory = OffsetFactory(weapons);
-
-	std::vector<offset> pattern = factory.getWeaponPattern(startWpn);
-
+	InputController controller    = InputController(startWpn);
+	std::vector<offset> pattern   = controller.getOffsetFactory().getWeaponPattern(startWpn);
 	RecoilCompensator compensator = RecoilCompensator(recoilFactor, pattern);
-	
-	InputController controller = InputController(&factory);
 	controller.registerObserver(&compensator);
 
 	std::thread compensatorThread = std::thread(&RecoilCompensator::compensateRecoil, &compensator);

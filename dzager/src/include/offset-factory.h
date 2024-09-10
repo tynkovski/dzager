@@ -9,16 +9,11 @@
 
 class OffsetFactory {
 public:
+    OffsetFactory();
     OffsetFactory(const std::vector<weapon>& weaponsv);
-
-    std::vector<offset> createPattern(const weapon &wpn) const;
     std::vector<offset> getWeaponPattern(const std::string &str) const;
-
-    std::vector<offset> getOverwatchPattern(const std::string &str) const;
-    std::vector<offset> createSoldier();
-    std::vector<offset> createBaptist();
+    std::vector<offset> createPattern(const weapon &wpn) const;
 
 private:
-    std::unordered_map<std::string, std::vector<offset>> m_offsetTable;
     std::unordered_map<std::string, weapon> m_weaponTable;
 };

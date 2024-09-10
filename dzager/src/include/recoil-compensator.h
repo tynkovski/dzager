@@ -11,9 +11,9 @@ public:
 
     void update(const std::vector<offset> &pattern);
     void compensateRecoil();
-    void setPattern(const std::vector<offset>& pattern);
 
 private:
+    void setPattern(const std::vector<offset>& pattern);
     float m_recoilFactor;
     float m_tick;
     std::vector<offset> m_pattern;

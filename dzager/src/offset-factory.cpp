@@ -32,11 +32,15 @@ std::vector<offset> OffsetFactory::createPattern(const weapon &wpn) const {
     return pattern;
 }
  
-std::vector<offset> OffsetFactory::getWeaponPattern(const std::string& str) const {
+weapon OffsetFactory::getWeapon(const std::string& str) const {
     if (m_weaponTable.contains(str)) {
-        weapon wpn = m_weaponTable.at(str);
-        std::vector<offset> pattern = createPattern(wpn);
-        return pattern;
+        return m_weaponTable.at(str);
     }
     throw std::invalid_argument(str);
+}
+
+std::vector<offset> OffsetFactory::getWeaponPattern(const std::string& str) const {
+    weapon wpn = getWeapon(str);
+    std::vector<offset> pattern = createPattern(wpn);
+    return pattern;
 }

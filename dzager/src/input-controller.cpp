@@ -4,12 +4,12 @@
 #include "include/json/json.h"
 #include "include/input-controller.h"
 
-InputController::InputController(std::string defaultWeapon, std::vector<offset>) {
+InputController::InputController(std::string defaultWeapon) {
     std::vector<weapon> weapons = readWeapons();
     m_offsetFactory = OffsetFactory(weapons);
-    m_currentWeapon = weapon();
+    m_currentWeapon = m_offsetFactory.getWeaponPattern(defaultWeapon);
 
-    //m_pattern = m_offsetFactory.createPattern(m_currentWeapon);
+    std::vector<offset> pattern = m_offsetFactory.createPattern(m_currentWeapon);
 }
 
 void InputController::getInput() {

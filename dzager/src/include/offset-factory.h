@@ -13,6 +13,8 @@ public:
     OffsetFactory(const std::vector<weapon>& weaponsv);
     std::vector<offset> getWeaponPattern(const std::string &str) const;
     std::vector<offset> createPattern(const weapon &wpn) const;
+    weapon getWeapon(const std::string& str) const;
+
 
 private:
     std::unordered_map<std::string, weapon> m_weaponTable;

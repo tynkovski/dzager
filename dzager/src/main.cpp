@@ -45,7 +45,7 @@ int main() {
 	std::cout << "startWpn      : " << startWpn     << "\n";
 
 	InputController controller    = InputController(startWpn);
-	std::vector<offset> pattern   = controller.getOffsetFactory().getWeaponPattern(startWpn);
+	std::vector<offset> pattern   = controller.getPattern();
 	RecoilCompensator compensator = RecoilCompensator(recoilFactor, pattern);
 	controller.registerObserver(&compensator);
 

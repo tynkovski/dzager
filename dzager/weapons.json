@@ -35,6 +35,13 @@
   ],
   "weapons": [
     {
+      "name": "none",
+      "rpm": 0,
+      "magSize": 0,
+      "recoil": 0.0,
+      "scope": "none"
+    },
+    {
       "name": "m16",
       "rpm": 700,
       "magSize": 30,
@@ -88,6 +95,13 @@
       "rpm": 850,
       "magSize": 20,
       "recoil": 15.0,
+      "scope": "red-dot"
+    },
+    {
+      "name": "scar",
+      "rpm": 600,
+      "magSize": 20,
+      "recoil": 22.0,
       "scope": "red-dot"
     }
   ]

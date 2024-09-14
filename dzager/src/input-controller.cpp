@@ -7,9 +7,12 @@
 InputController::InputController(std::string defaultWeapon) {
     std::vector<weapon> weapons = readWeapons();
     m_offsetFactory = OffsetFactory(weapons);
-    m_currentWeapon = m_offsetFactory.getWeaponPattern(defaultWeapon);
+    m_currentWeapon = m_offsetFactory.getWeapon(defaultWeapon);
+    m_currentPattern = m_offsetFactory.createPattern(m_currentWeapon);
+}
 
-    std::vector<offset> pattern = m_offsetFactory.createPattern(m_currentWeapon);
+std::vector<offset>& InputController::getCurrentPattern() {
+    return m_currentPattern;
 }
 
 void InputController::getInput() {

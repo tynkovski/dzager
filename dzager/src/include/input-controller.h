@@ -11,6 +11,8 @@ class InputController {
 public:
 	InputController(std::string defaultWeapon);
 
+	std::vector<offset>& getCurrentPattern();
+
 	void getInput();
 	void registerObserver(observer<std::vector<offset>>* _observer);
 
@@ -21,8 +23,8 @@ private:
 	void getKeyboardInput();
 	void reset();
 
-	observer<std::vector<offset>>* m_observer;
-	OffsetFactory m_offsetFactory;
-
 	weapon m_currentWeapon;
+	observer<std::vector<offset>>* m_observer;
+	std::vector<offset> m_currentPattern;
+	OffsetFactory m_offsetFactory;
 };

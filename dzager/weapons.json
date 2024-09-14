@@ -2,7 +2,7 @@
   "scopes": [
     {
       "name": "red-dot",
-      "aimMultiplier": 1.0
+      "aimMultiplier": 0.882
     },
     {
       "name": "cobra",
@@ -14,7 +14,7 @@
     },
     {
       "name": "holo-mini",
-      "aimMultiplier": 1.0
+      "aimMultiplier": 0.87
     },
     {
       "name": "holo",
@@ -26,7 +26,7 @@
     },
     {
       "name": "pso-1",
-      "aimMultiplier": 1.0
+      "aimMultiplier": 2.0
     },
     {
       "name": "specter",
@@ -46,7 +46,7 @@
       "rpm": 600,
       "magSize": 30,
       "recoil": 19.0,
-      "scope": "none"
+      "scope": "red-dot"
     },
     {
       "name": "ak12",
@@ -88,7 +88,7 @@
       "rpm": 850,
       "magSize": 20,
       "recoil": 15.0,
-      "scope": "holo-mini"
+      "scope": "red-dot"
     }
   ]
 }

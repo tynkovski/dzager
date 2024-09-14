@@ -22,7 +22,7 @@
     },
     {
       "name": "acog",
-      "aimMultiplier": 1.0
+      "aimMultiplier": 1.2
     },
     {
       "name": "pso-1",
@@ -30,7 +30,7 @@
     },
     {
       "name": "specter",
-      "aimMultiplier": 1.0
+      "aimMultiplier": 1.5
     }
   ],
   "weapons": [
@@ -101,8 +101,8 @@
       "name": "scar",
       "rpm": 600,
       "magSize": 20,
-      "recoil": 22.0,
-      "scope": "red-dot"
+      "recoil": 19.0,
+      "scope": "specter"
     }
   ]
 }

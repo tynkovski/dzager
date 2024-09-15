@@ -9,7 +9,7 @@
 
 class InputController {
 public:
-	InputController(std::string defaultWeapon);
+	InputController(std::string fileName, std::string defaultWeapon);
 
 	std::vector<offset>& getCurrentPattern();
 
@@ -23,6 +23,7 @@ private:
 	void getKeyboardInput();
 	void reset();
 
+	std::string m_fileName;
 	weapon m_currentWeapon;
 	observer<std::vector<offset>>* m_observer;
 	std::vector<offset> m_currentPattern;

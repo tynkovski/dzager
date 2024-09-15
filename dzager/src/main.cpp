@@ -31,10 +31,11 @@ int main() {
 	mINI::INIStructure ini;
 	iniFile.read(ini);
 
-	float screenHeight   = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
-	float dpi            = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
-	float sens           = parseOrDefault(ini["settings"]["sens"]        , 9.f);
-	std::string startWpn = parseOrDefault(ini["settings"]["startWpn"]    , "m16");
+	float screenHeight      = parseOrDefault(ini["settings"]["screenHeight"], 1080.f);
+	float dpi               = parseOrDefault(ini["settings"]["dpi"]         , 400.f);
+	float sens              = parseOrDefault(ini["settings"]["sens"]        , 9.f);
+	std::string startWpn    = parseOrDefault(ini["settings"]["startWpn"]    , "m16");
+	std::string weaponsFile = parseOrDefault(ini["settings"]["file"]        , "weapons.json");
 
 	float recoilFactor = screenHeight / (dpi * sens);
 	
@@ -43,8 +44,9 @@ int main() {
 	std::cout << "dpi           : " << dpi          << "\n";
 	std::cout << "recoilFactor  : " << recoilFactor << "\n";
 	std::cout << "startWpn      : " << startWpn     << "\n";
+	std::cout << "weapons file  : " << weaponsFile  << "\n";
 
-	InputController controller    = InputController(startWpn);
+	InputController controller    = InputController(weaponsFile, startWpn);
 	RecoilCompensator compensator = RecoilCompensator(recoilFactor, controller.getCurrentPattern());
 	controller.registerObserver(&compensator);
 

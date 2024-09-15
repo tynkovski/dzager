@@ -22,7 +22,7 @@
     },
     {
       "name": "acog",
-      "aimMultiplier": 1.0
+      "aimMultiplier": 1.2
     },
     {
       "name": "pso-1",
@@ -30,10 +30,17 @@
     },
     {
       "name": "specter",
-      "aimMultiplier": 1.0
+      "aimMultiplier": 1.5
     }
   ],
   "weapons": [
+    {
+      "name": "none",
+      "rpm": 0,
+      "magSize": 0,
+      "recoil": 0.0,
+      "scope": "none"
+    },
     {
       "name": "m16",
       "rpm": 700,
@@ -89,6 +96,13 @@
       "magSize": 20,
       "recoil": 15.0,
       "scope": "red-dot"
+    },
+    {
+      "name": "scar",
+      "rpm": 600,
+      "magSize": 20,
+      "recoil": 19.0,
+      "scope": "specter"
     }
   ]
 }

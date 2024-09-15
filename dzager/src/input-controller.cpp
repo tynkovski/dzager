@@ -4,7 +4,8 @@
 #include "include/json/json.h"
 #include "include/input-controller.h"
 
-InputController::InputController(std::string defaultWeapon) {
+InputController::InputController(std::string fileName, std::string defaultWeapon) {
+    m_fileName = fileName;
     std::vector<weapon> weapons = readWeapons();
     m_offsetFactory = OffsetFactory(weapons);
     m_currentWeapon = m_offsetFactory.getWeapon(defaultWeapon);
@@ -26,8 +27,13 @@ void InputController::getConsoleInput() {
     std::string input;
     std::getline(std::cin, input);
 
+    if (input.empty()) {
+        return;
+    }
+
     if (input == "reset") {
         reset();
+        std::cout << "loading " << m_fileName << "\n";
         return;
     }
 
@@ -52,8 +58,6 @@ void InputController::registerObserver(observer<std::vector<offset>>* _observer)
 void InputController::reset() {
     std::vector<weapon> weapons = readWeapons();
     m_offsetFactory = OffsetFactory(weapons);
-
-
 }
 
 void InputController::notifyObserver(std::string name, std::vector<offset> &pattern) const {
@@ -68,7 +72,7 @@ void InputController::notifyObserver(std::string name, std::vector<offset> &patt
 }
 
 std::vector<weapon> InputController::readWeapons() const {
-    std::ifstream jsonFile("weapons.json");
+    std::ifstream jsonFile(m_fileName);
     std::stringstream jsonBuffer; jsonBuffer << jsonFile.rdbuf();
     std::vector<weapon> weapons = read_weapons_json(jsonBuffer.str());
     return weapons;

@@ -1,4 +1,4 @@
-# Overwatch 2 and Polygon Recoil Compensator
+# Polygon Recoil Compensator
 
 Project does not use game process, can not be detected by any anti-cheat.
 
